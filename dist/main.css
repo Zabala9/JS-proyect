@@ -48,10 +48,6 @@ input[type=submit] {
   cursor: pointer;
 }
 
-.header {
-  font-weight: 100;
-}
-.header div {
-  display: flex;
-  justify-content: center;
+body {
+  background-color: black;
 }
