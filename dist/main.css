@@ -50,4 +50,10 @@ input[type=submit] {
 
 body {
   background-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+#mister-game {
+  margin-top: 75px;
 }

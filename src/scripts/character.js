@@ -5,9 +5,10 @@ export default class Character{
             x: 0,
             y: 1
         }
+        this.height = 70;
+        this.width = 70;
 
         // velocity going down
-        this.height = 100;
         this.gravity = 0.5;
     }
 
@@ -30,12 +31,13 @@ export default class Character{
     draw(ctx){
         // drawing square red(character)
         ctx.fillStyle = "red";
-        ctx.fillRect(this.position.x, this.position.y, 100, this.height);
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 
     updatePosition(){
-        // changing the pos to move the character down
         this.position.x += this.velocity.x;
+
+        // changing the pos to move the character down
         this.position.y += this.velocity.y;
     }
 }

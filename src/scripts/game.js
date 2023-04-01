@@ -10,7 +10,7 @@ const KEYS = {
     }
 }
 
-// const IMG = "./im";
+const IMG = "./assets/fondo2.png";
 
 export default class Game {
     constructor(canvas){
@@ -24,7 +24,7 @@ export default class Game {
     restart(){
         // creating instance of Character
         this.character = new Character({x:0, y:0});
-        this.level = new Level({x:0, y:0}, );
+        this.level = new Level({x:0, y:0}, IMG);
         this.animate();
     }
 
@@ -33,9 +33,13 @@ export default class Game {
         this.ctx.fillStyle = "white";
         this.ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
         
+        // creating background
+        this.level.animate(this.ctx, this.dimensions);
+
         // calling animate from Character class
         this.character.animate(this.ctx, this.dimensions);
 
+        //changing velocity if the key is press or type
         this.character.velocity.x = 0;
         if(KEYS.d.typed){
             this.character.velocity.x = 4;

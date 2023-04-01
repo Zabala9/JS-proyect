@@ -3,9 +3,10 @@
 
 body {
     background-color: black;
+    display: flex;
+    justify-content: center;
 }
 
-// #mister-game{
-//     background-color: aquamarine;
-
-// }
+#mister-game{
+    margin-top: 75px;
+}
