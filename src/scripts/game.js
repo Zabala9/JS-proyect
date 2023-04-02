@@ -1,5 +1,7 @@
 import Character from "./character";
 import Level from "./level";
+import CollisionTest from "./collision";
+import { collision } from "../data/collisions";
 
 const KEYS = {
     d: {
@@ -10,7 +12,23 @@ const KEYS = {
     }
 }
 
-const IMG = "./assets/fondo2.png";
+//creating 2D array for the collisions
+let collisionsMap = [];
+for(let i=0; i < collision.length; i += 93){
+    collisionsMap.push(collision.slice(i, 93+i));
+}
+
+//creating the instance for the collisions
+const collisionBlocks = [];
+collisionsMap.forEach((row, y) => {
+    row.forEach((ele, x) => {
+        if(ele === 5156){
+            collisionBlocks.push(new CollisionTest({x: x * 12, y: y * 12 }));
+        }
+    });
+});
+
+const IMG = "./assets/fondo2Test.png";
 
 export default class Game {
     constructor(canvas){
@@ -23,8 +41,9 @@ export default class Game {
     // more methods
     restart(){
         // creating instance of Character
-        this.character = new Character({x:0, y:0});
+        this.character = new Character({x:50, y:50}, collisionBlocks);
         this.level = new Level({x:0, y:0}, IMG);
+        // this.collision = new Collision();
         this.animate();
     }
 
@@ -36,8 +55,16 @@ export default class Game {
         // creating background
         this.level.animate(this.ctx, this.dimensions);
 
+        //creating collision blocks
+        collisionBlocks.forEach(el => {
+            el.animate(this.ctx);
+        });
+        // this.collision.animate(this.ctx);
+
         // calling animate from Character class
         this.character.animate(this.ctx, this.dimensions);
+
+
 
         //changing velocity if the key is press or type
         this.character.velocity.x = 0;
@@ -62,7 +89,7 @@ export default class Game {
                     KEYS.a.typed = true;
                     break;
                 case ' ':
-                    this.character.velocity.y = -14;
+                    this.character.velocity.y = -13;
                     break;
             }
         })
