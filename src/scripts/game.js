@@ -28,7 +28,8 @@ collisionsMap.forEach((row, y) => {
     });
 });
 
-const IMG = "./assets/fondo2Test.png";
+const BACKGROUND = "./assets/fondo2Test.png";
+const Charac = "./assets/mainCharacters/ninjaFrog/Idle.png";
 
 export default class Game {
     constructor(canvas){
@@ -41,9 +42,8 @@ export default class Game {
     // more methods
     restart(){
         // creating instance of Character
-        this.character = new Character({x:50, y:50}, collisionBlocks);
-        this.level = new Level({x:0, y:0}, IMG);
-        // this.collision = new Collision();
+        this.character = new Character({position:{x:50, y:50}, collisionBlocks, imageSrc: Charac, subImgs: 11 });
+        this.level = new Level({position: {x:0, y:0}, imageSrc: BACKGROUND, subImgs: 1 });
         this.animate();
     }
 
@@ -59,12 +59,9 @@ export default class Game {
         collisionBlocks.forEach(el => {
             el.animate(this.ctx);
         });
-        // this.collision.animate(this.ctx);
 
         // calling animate from Character class
         this.character.animate(this.ctx, this.dimensions);
-
-
 
         //changing velocity if the key is press or type
         this.character.velocity.x = 0;

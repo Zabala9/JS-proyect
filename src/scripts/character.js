@@ -1,32 +1,26 @@
-export default class Character{
-    constructor(position, collisionBlocks){
+import Level from "./level";
+
+export default class Character extends Level{
+    constructor({ position, collisionBlocks, imageSrc, subImgs }){
+        super({ imageSrc, subImgs });
         this.position = position;
         this.velocity = {
             x: 1,
             y: 1
         }
-        this.height = 70;
-        this.width = 70;
 
         // velocity going down
         this.gravity = 0.5;
         this.collisionBlocks = collisionBlocks;
     }
 
-    animate(ctx, dimensions){
+    animate(ctx){
         this.draw(ctx);
         this.updatePosition();
-        // this.checkVerticalCollisions();
-        
-    }
-
-    draw(ctx){
-        // drawing square red(character)
-        ctx.fillStyle = "red";
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 
     updatePosition(){
+        this.changePositionSubImg();
         this.position.x += this.velocity.x;
         this.checkHorizontalCollisions();
         this.gravedad();
@@ -37,13 +31,6 @@ export default class Character{
         for(let i=0; i < this.collisionBlocks.length; i++){
             const blocks = this.collisionBlocks[i];
 
-            /*first statement: check if the bottom of our player intersect with the top
-                            of the collision block
-            second statement: check if the top of the player is touching the bottom
-                            of the collision block
-            third statement:  if the player is moving to the left, check if the left side
-                            of the player is less or igual to the rigth side of the collision block
-            fourth statement: the same from the third statement but the oposite */
             if(this.position.y + this.height >= blocks.position.y &&
                 this.position.y <= blocks.position.y + blocks.height &&
                 this.position.x <= blocks.position.x + blocks.width &&
