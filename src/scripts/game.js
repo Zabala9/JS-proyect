@@ -33,6 +33,10 @@ const STOPPED = "./assets/mainCharacters/ninjaFrog/Idle.png";
 const RUN = "./assets/mainCharacters/ninjaFrog/Run.png";
 const JUMP = "./assets/mainCharacters/ninjaFrog/Jump.png";
 const FALL = "./assets/mainCharacters/ninjaFrog/Fall.png";
+const FALLLEFT = "./assets/mainCharacters/ninjaFrog/FallLeft.png";
+const RUNLEFT = "./assets/mainCharacters/ninjaFrog/RunLeft.png";
+const IDLELEFT = "./assets/mainCharacters/ninjaFrog/IdleLeft.png";
+const JUMPLEFT = "./assets/mainCharacters/ninjaFrog/JumpLeft.png";
 
 export default class Game {
     constructor(canvas){
@@ -51,9 +55,13 @@ export default class Game {
                 /*in the for to take the appropiate animation, we're gonna create
                 a new key-value (image: new Image()) */
                 Idle: { imageSrc: STOPPED, subImgs: 11, velSubImg: 3 },
+                IdleLeft: { imageSrc: IDLELEFT, subImgs: 11, velSubImg: 3 },
                 Run: { imageSrc: RUN, subImgs: 11, velSubImg: 4 },
+                RunLeft: { imageSrc: RUNLEFT, subImgs: 11, velSubImg: 4 },
                 Jump: { imageSrc: JUMP, subImgs: 1, velSubImg: 3 },
-                Fall: { imageSrc: FALL, subImgs: 1, velSubImg: 3 }
+                JumpLeft: { imageSrc: JUMPLEFT, subImgs: 1, velSubImg: 3 },
+                Fall: { imageSrc: FALL, subImgs: 1, velSubImg: 3 },
+                FallLeft: { imageSrc: FALLLEFT, subImgs: 1, velSubImg: 3 }
             }
         });
         this.level = new Level({position: {x:0, y:0}, imageSrc: BACKGROUND, subImgs: 1 });
@@ -82,16 +90,31 @@ export default class Game {
             /*when I press an expecific key I want to swap the animation */
             this.character.swapAnimation('Run');
             this.character.velocity.x = 3;
+            this.character.lastDirection = 'right';
         } else if(KEYS.a.typed){
+            this.character.swapAnimation('RunLeft');
             this.character.velocity.x = -3;
+            this.character.lastDirection = 'left';
         } else if(this.character.velocity.y === 0){
-            this.character.swapAnimation('Idle');
+            if(this.character.lastDirection === 'right'){
+                this.character.swapAnimation('Idle');
+            } else {
+                this.character.swapAnimation('IdleLeft');
+            }
         }
 
         if(this.character.velocity.y < 0){
-            this.character.swapAnimation('Jump');
+            if(this.character.lastDirection === 'right'){
+                this.character.swapAnimation('Jump');
+            } else {
+                this.character.swapAnimation('JumpLeft');
+            }
         } else if(this.character.velocity.y > 0){
-            this.character.swapAnimation('Fall');
+            if(this.character.lastDirection === 'right'){
+                this.character.swapAnimation('Fall');
+            } else {
+                this.character.swapAnimation('FallLeft');
+            }
         }
     }
 

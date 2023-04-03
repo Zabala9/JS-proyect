@@ -14,6 +14,7 @@ export default class Character extends Level{
         this.collisionBlocks = collisionBlocks;
 
         this.animations = animations;
+        this.lastDirection = 'right';
 
         //taking the appropiate animation
         for(let key in this.animations){
