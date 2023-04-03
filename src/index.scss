@@ -6,12 +6,15 @@ body {
 }
 
 p {
+    border: 1px solid white;
     display: flex;
-    margin-top: 17px;
+    margin-top: 10px;
     margin-left: 650px;
     width: 250px;
+    justify-content: center;
     align-items: center;
-    background-color: white;
+    color: red;
+    font-style: oblique;
     font-size: 40px;
 }
 
