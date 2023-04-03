@@ -132,10 +132,12 @@ export default class Game {
                     KEYS.a.typed = true;
                     break;
                 case ' ':
-                    this.character.velocity.y = -13;
+                    if(this.character.velocity.y === 0){
+                        this.character.velocity.y = -13;
+                    }
                     break;
             }
-        })
+        });
 
         // if the key is no typed this will be false again.
         // in that way we can stop the character if the key is not press
@@ -150,6 +152,6 @@ export default class Game {
                     KEYS.a.typed = false;
                     break;
             }
-        })
+        });
     }
 }

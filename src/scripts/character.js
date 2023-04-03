@@ -32,6 +32,8 @@ export default class Character extends Level{
         if(this.image === this.animations[key].image || !this.loaded){
             return
         }
+        
+        this.positionSubImg = 0;
         this.image = this.animations[key].image; //.image because I want to pass the key-value image
         this.subImgs = this.animations[key].subImgs;
         this.velSubImg = this.animations[key].velSubImg;
