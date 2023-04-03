@@ -52,7 +52,7 @@ body {
   background-color: black;
 }
 
-p {
+#p {
   border: 1px solid white;
   display: flex;
   margin-top: 10px;
@@ -65,7 +65,7 @@ p {
   font-size: 40px;
 }
 
-#o {
+#img {
   width: 30px;
   height: 30px;
 }
@@ -73,4 +73,13 @@ p {
 #mister-game {
   margin-left: 230px;
   margin-top: 5px;
+}
+
+#p1-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  color: red;
+  font-style: oblique;
+  font-size: 40px;
 }
