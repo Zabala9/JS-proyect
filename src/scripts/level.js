@@ -1,6 +1,7 @@
 export default class Level {
     constructor({ position, imageSrc, subImgs = 1 }){
         this.position = position;
+        this.loaded = false;
         this.image = new Image();
 
         //when the img load we are defined the size
@@ -8,6 +9,7 @@ export default class Level {
             //taking one 'img' inside the subImgs
             this.width = this.image.width / subImgs;
             this.height = this.image.height;
+            this.loaded = true;
         };
         this.image.src = imageSrc;
 
@@ -26,7 +28,9 @@ export default class Level {
     }
 
     draw(ctx){
-        // if the image is not loaded I want to return all together
+        /* if the image is not loaded/exists I want to return all together
+        becasue if we try to call c.drawImage, the this.image will be undefined 
+        and this will be an error */
         if(!this.image){
             return
         }
@@ -51,8 +55,8 @@ export default class Level {
             add 1 to positionSubImg */
         if(this.lapseSubImg % this.velSubImg === 0){
             /* -1 because my backgroud has a subImgs of 1 and my positionSubImg is equals to 0 
-            so we don't want to increase the positionSubImg*/
-            if(this.positionSubImg < this.subImgs - 1){
+            so we don't want to increase the positionSubImg */
+            if(this.positionSubImg < (this.subImgs-1)){
                 this.positionSubImg++;
             } else {
                 this.positionSubImg = 0;

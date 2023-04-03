@@ -1,7 +1,7 @@
 import Level from "./level";
 
 export default class Character extends Level{
-    constructor({ position, collisionBlocks, imageSrc, subImgs }){
+    constructor({ position, collisionBlocks, imageSrc, subImgs, animations }){
         super({ imageSrc, subImgs });
         this.position = position;
         this.velocity = {
@@ -12,6 +12,28 @@ export default class Character extends Level{
         // velocity going down
         this.gravity = 0.5;
         this.collisionBlocks = collisionBlocks;
+
+        this.animations = animations;
+
+        //taking the appropiate animation
+        for(let key in this.animations){
+            const image = new Image();
+            image.src = this.animations[key].imageSrc;
+
+            //we are adding an img propertie into the animations hash
+            this.animations[key].image = image;
+        }
+
+    }
+
+    swapAnimation(key){
+        //I only want to call this if this.image is not equals to this.animation[key].image
+        if(this.image === this.animations[key].image || !this.loaded){
+            return
+        }
+        this.image = this.animations[key].image; //.image because I want to pass the key-value image
+        this.subImgs = this.animations[key].subImgs;
+        this.velSubImg = this.animations[key].velSubImg;
     }
 
     animate(ctx){
@@ -50,8 +72,8 @@ export default class Character extends Level{
     }
 
     gravedad(){
-        this.position.y += this.velocity.y; // changing the pos to move the character down
         this.velocity.y += this.gravity; // updating the position
+        this.position.y += this.velocity.y; // changing the pos to move the character down
     }
 
     checkVerticalCollisions(){

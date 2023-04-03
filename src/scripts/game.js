@@ -28,8 +28,11 @@ collisionsMap.forEach((row, y) => {
     });
 });
 
-const BACKGROUND = "./assets/fondo2Test.png";
-const Charac = "./assets/mainCharacters/ninjaFrog/Idle.png";
+const BACKGROUND = "./assets/fondo2.png";
+const STOPPED = "./assets/mainCharacters/ninjaFrog/Idle.png";
+const RUN = "./assets/mainCharacters/ninjaFrog/Run.png";
+const JUMP = "./assets/mainCharacters/ninjaFrog/Jump.png";
+const FALL = "./assets/mainCharacters/ninjaFrog/Fall.png";
 
 export default class Game {
     constructor(canvas){
@@ -42,7 +45,17 @@ export default class Game {
     // more methods
     restart(){
         // creating instance of Character
-        this.character = new Character({position:{x:50, y:50}, collisionBlocks, imageSrc: Charac, subImgs: 11 });
+        // animations is a 'library' that has all the animations
+        this.character = new Character({position:{x:50, y:50}, collisionBlocks, imageSrc: STOPPED, subImgs: 11,
+            animations: {
+                /*in the for to take the appropiate animation, we're gonna create
+                a new key-value (image: new Image()) */
+                Idle: { imageSrc: STOPPED, subImgs: 11, velSubImg: 3 },
+                Run: { imageSrc: RUN, subImgs: 11, velSubImg: 4 },
+                Jump: { imageSrc: JUMP, subImgs: 1, velSubImg: 3 },
+                Fall: { imageSrc: FALL, subImgs: 1, velSubImg: 3 }
+            }
+        });
         this.level = new Level({position: {x:0, y:0}, imageSrc: BACKGROUND, subImgs: 1 });
         this.animate();
     }
@@ -63,12 +76,22 @@ export default class Game {
         // calling animate from Character class
         this.character.animate(this.ctx, this.dimensions);
 
-        //changing velocity if the key is press or type
+        //changing velocity if the key is press or typed
         this.character.velocity.x = 0;
         if(KEYS.d.typed){
-            this.character.velocity.x = 4;
+            /*when I press an expecific key I want to swap the animation */
+            this.character.swapAnimation('Run');
+            this.character.velocity.x = 3;
         } else if(KEYS.a.typed){
-            this.character.velocity.x = -4;
+            this.character.velocity.x = -3;
+        } else if(this.character.velocity.y === 0){
+            this.character.swapAnimation('Idle');
+        }
+
+        if(this.character.velocity.y < 0){
+            this.character.swapAnimation('Jump');
+        } else if(this.character.velocity.y > 0){
+            this.character.swapAnimation('Fall');
         }
     }
 
