@@ -1,5 +1,8 @@
 import Level from "./level";
 import { items } from "../data/items";
+import Item from "./item";
+
+const IMGITEM = "./assets/items/Strawberry.png";
 
 let itemsMap = [];
 for(let i=0; i < items.length; i+= 93){
@@ -10,7 +13,7 @@ const itemBlocks = [];
 itemsMap.forEach((row, y) => {
     row.forEach((ele, x) => {
         if(ele === 10287){
-            itemBlocks.push({x: x * 12, y: y * 12});
+            itemBlocks.push(new Item({position: {x: x * 12, y: y * 12}, imageSource: IMGITEM, subImgs: 17}));
         }
     });
 });
@@ -42,6 +45,7 @@ export default class Character extends Level{
 
         this.widthItem = 10;
         this.heightItem = 10;
+        this.elements = itemBlocks.length;
     }
 
     swapAnimation(key){
@@ -57,17 +61,13 @@ export default class Character extends Level{
     }
 
     animate(ctx){
-        this.drawItems(ctx);
+        // this.drawItems(ctx);
         this.draw(ctx);
         this.updatePosition();
-    }
 
-    drawItems(ctx){
-        //creating item blocks
-        for(let i=0; i < itemBlocks.length; i++){
-            ctx.fillStyle = 'red';
-            ctx.fillRect(itemBlocks[i].x, itemBlocks[i].y, this.widthItem, this.heightItem);
-        }
+        itemBlocks.forEach(el => {
+            el.animate(ctx);
+        });
     }
 
     updatePosition(){
@@ -106,10 +106,10 @@ export default class Character extends Level{
             const item = itemBlocks[i];
 
             // console.log(item);
-            if(this.position.y + this.height >= item.y &&
-                this.position.y <= item.y + this.heightItem &&
-                this.position.x <= item.x + this.widthItem &&
-                this.position.x + this.width >= item.x){
+            if(this.position.y + this.height >= item.position.y &&
+                this.position.y <= item.position.y + this.heightItem &&
+                this.position.x <= item.position.x + this.widthItem &&
+                this.position.x + this.width >= item.position.x){
                     //deleting item when the collision happens
                     itemBlocks.splice(i, 1);
                     break;
