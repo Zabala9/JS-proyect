@@ -40,6 +40,8 @@ export default class Character extends Level{
             this.animations[key].image = image;
         }
 
+        this.widthItem = 10;
+        this.heightItem = 10;
     }
 
     swapAnimation(key){
@@ -62,12 +64,9 @@ export default class Character extends Level{
 
     drawItems(ctx){
         //creating item blocks
-        const width = 10;
-        const height = 10;
-
         for(let i=0; i < itemBlocks.length; i++){
             ctx.fillStyle = 'red';
-            ctx.fillRect(itemBlocks[i].x, itemBlocks[i].y, width, height);
+            ctx.fillRect(itemBlocks[i].x, itemBlocks[i].y, this.widthItem, this.heightItem);
         }
     }
 
@@ -75,7 +74,7 @@ export default class Character extends Level{
         this.changePositionSubImg();
         this.position.x += this.velocity.x;
         this.checkHorizontalCollisions();
-        // this.checkCollisionItems();
+        this.checkCollisionItems();
         this.gravedad();
         this.checkVerticalCollisions();
     }
@@ -106,11 +105,14 @@ export default class Character extends Level{
         for(let i =0; i < itemBlocks.length; i++){
             const item = itemBlocks[i];
 
-            if(this.position.y + this.height >= item.position.y &&
-                this.position.y <= item.position.y + item.height &&
-                this.position.x <= item.position.x + item.height &&
-                this.position.x + this.width >= item.position.x){
-                    console.log("touching items.");
+            // console.log(item);
+            if(this.position.y + this.height >= item.y &&
+                this.position.y <= item.y + this.heightItem &&
+                this.position.x <= item.x + this.widthItem &&
+                this.position.x + this.width >= item.x){
+                    //deleting item when the collision happens
+                    itemBlocks.splice(i, 1);
+                    break;
             }
         }
     }
