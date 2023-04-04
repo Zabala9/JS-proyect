@@ -75,9 +75,12 @@ body {
   margin-top: 5px;
 }
 
-#p1-footer {
+.footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+
+#p-footer {
   margin-top: 5px;
   color: red;
   font-style: oblique;
