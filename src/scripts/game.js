@@ -44,15 +44,15 @@ export default class Game {
         // initialize canvas
         this.ctx = canvas.getContext("2d");
         this.dimensions = { width: canvas.width, height: canvas.height };
+        this.positionCharacter = {x:50, y:500};
         this.restart();
-        this.animate();
         this.events();
     }
     // more methods
     restart(){
         // creating instance of Character
         // animations is a 'library' that has all the animations
-        this.character = new Character({position:{x:50, y:500}, dimensionsCanvas: this.dimensions, collisionBlocks, imageSrc: STOPPED, subImgs: 11,
+        this.character = new Character({position: this.positionCharacter, dimensionsCanvas: this.dimensions, collisionBlocks, imageSrc: STOPPED, subImgs: 11,
             animations: {
                 /*in the for to take the appropiate animation, we're gonna create
                 a new key-value (image: new Image()) */
@@ -67,6 +67,7 @@ export default class Game {
             }
         });
         this.level = new Level({position: {x:0, y:0}, imageSrc: BACKGROUND, subImgs: 1 });
+        this.animate();
     }
 
     animate(){
