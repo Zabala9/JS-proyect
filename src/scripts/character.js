@@ -19,9 +19,10 @@ itemsMap.forEach((row, y) => {
 });
 
 export default class Character extends Level{
-    constructor({ position, collisionBlocks, imageSrc, subImgs, animations }){
+    constructor({ position, dimensionsCanvas, collisionBlocks, imageSrc, subImgs, animations }){
         super({ imageSrc, subImgs });
         this.position = position;
+        this.dimensionsCanvas = dimensionsCanvas;
         this.velocity = {
             x: 1,
             y: 1
@@ -91,7 +92,7 @@ export default class Character extends Level{
             el.animate(ctx);
         });
 
-        // this.checkCharacterOutOfBounds(ctx);
+        this.checkCharacterOutOfBounds();
     }
 
     updatePosition(){
@@ -172,9 +173,40 @@ export default class Character extends Level{
         this.position.y += this.velocity.y; // changing the pos to move the character down
     }
 
-    // checkCharacterOutOfBounds(ctx){
-    //     console.log(ctx.width);
-    // }
+    checkCharacterOutOfBounds(){
+        if(this.position.y + this.width > this.dimensionsCanvas.height){
+            this.lives--;
+
+            const footerDel = document.getElementById('footer');
+            footerDel.remove();
+
+            let footer = document.createElement('FOOTER');
+                footer.setAttribute('id', 'footer');
+                document.body.appendChild(footer);
+
+                let p1 = document.createElement('P');
+                let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
+                p1.setAttribute('id', 'p-footer');
+                p1.appendChild(p1Text);
+
+                let p2 = document.createElement('P');
+                let p2Text = document.createTextNode(`Lives: ${this.lives}`);
+                p2.setAttribute('id', 'p-footer');
+                p2.appendChild(p2Text);
+
+                let p3 = document.createElement('P');
+                let p3Text = document.createTextNode('Level: ');
+                p3.setAttribute('id', 'p-footer');
+                p3.appendChild(p3Text);
+
+                footer.appendChild(p1);
+                footer.appendChild(p2);
+                footer.appendChild(p3);
+
+            this.position.x = 50;
+            this.position.y = 500;
+        }
+    }
 
     checkVerticalCollisions(){
         for(let i=0; i < this.collisionBlocks.length; i++){
