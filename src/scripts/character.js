@@ -45,7 +45,30 @@ export default class Character extends Level{
 
         this.widthItem = 10;
         this.heightItem = 10;
-        this.elements = itemBlocks.length;
+        this.lives = 3;
+
+        let footer = document.createElement('FOOTER');
+        footer.setAttribute('id', 'footer');
+        document.body.appendChild(footer);
+
+        let p1 = document.createElement('P');
+        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
+        p1.setAttribute('id', 'p-footer');
+        p1.appendChild(p1Text);
+
+        let p2 = document.createElement('P');
+        let p2Text = document.createTextNode(`Lives: ${this.lives}`);
+        p2.setAttribute('id', 'p-footer');
+        p2.appendChild(p2Text);
+
+        let p3 = document.createElement('P');
+        let p3Text = document.createTextNode('Level: ');
+        p3.setAttribute('id', 'p-footer');
+        p3.appendChild(p3Text);
+
+        footer.appendChild(p1);
+        footer.appendChild(p2);
+        footer.appendChild(p3);
     }
 
     swapAnimation(key){
@@ -61,13 +84,14 @@ export default class Character extends Level{
     }
 
     animate(ctx){
-        // this.drawItems(ctx);
         this.draw(ctx);
         this.updatePosition();
 
         itemBlocks.forEach(el => {
             el.animate(ctx);
         });
+
+        // this.checkCharacterOutOfBounds(ctx);
     }
 
     updatePosition(){
@@ -105,13 +129,39 @@ export default class Character extends Level{
         for(let i =0; i < itemBlocks.length; i++){
             const item = itemBlocks[i];
 
-            // console.log(item);
             if(this.position.y + this.height >= item.position.y &&
                 this.position.y <= item.position.y + this.heightItem &&
                 this.position.x <= item.position.x + this.widthItem &&
                 this.position.x + this.width >= item.position.x){
                     //deleting item when the collision happens
                     itemBlocks.splice(i, 1);
+
+                    const footerDel = document.getElementById('footer');
+                    footerDel.remove();
+
+                    let footer = document.createElement('FOOTER');
+                        footer.setAttribute('id', 'footer');
+                        document.body.appendChild(footer);
+
+                        let p1 = document.createElement('P');
+                        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
+                        p1.setAttribute('id', 'p-footer');
+                        p1.appendChild(p1Text);
+
+                        let p2 = document.createElement('P');
+                        let p2Text = document.createTextNode(`Lives: ${this.lives}`);
+                        p2.setAttribute('id', 'p-footer');
+                        p2.appendChild(p2Text);
+
+                        let p3 = document.createElement('P');
+                        let p3Text = document.createTextNode('Level: ');
+                        p3.setAttribute('id', 'p-footer');
+                        p3.appendChild(p3Text);
+
+                        footer.appendChild(p1);
+                        footer.appendChild(p2);
+                        footer.appendChild(p3);
+
                     break;
             }
         }
@@ -121,6 +171,10 @@ export default class Character extends Level{
         this.velocity.y += this.gravity; // updating the position
         this.position.y += this.velocity.y; // changing the pos to move the character down
     }
+
+    // checkCharacterOutOfBounds(ctx){
+    //     console.log(ctx.width);
+    // }
 
     checkVerticalCollisions(){
         for(let i=0; i < this.collisionBlocks.length; i++){
