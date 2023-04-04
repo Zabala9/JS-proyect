@@ -1,4 +1,4 @@
-export default class CollisionTest{
+export default class Collision{
     constructor(position){
         this.position = position;
         this.width = 12;

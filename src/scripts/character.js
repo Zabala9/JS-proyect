@@ -1,4 +1,19 @@
 import Level from "./level";
+import { items } from "../data/items";
+
+let itemsMap = [];
+for(let i=0; i < items.length; i+= 93){
+    itemsMap.push(items.slice(i, 93+i));
+}
+
+const itemBlocks = [];
+itemsMap.forEach((row, y) => {
+    row.forEach((ele, x) => {
+        if(ele === 10287){
+            itemBlocks.push({x: x * 12, y: y * 12});
+        }
+    });
+});
 
 export default class Character extends Level{
     constructor({ position, collisionBlocks, imageSrc, subImgs, animations }){
@@ -40,14 +55,27 @@ export default class Character extends Level{
     }
 
     animate(ctx){
+        this.drawItems(ctx);
         this.draw(ctx);
         this.updatePosition();
+    }
+
+    drawItems(ctx){
+        //creating item blocks
+        const width = 10;
+        const height = 10;
+
+        for(let i=0; i < itemBlocks.length; i++){
+            ctx.fillStyle = 'red';
+            ctx.fillRect(itemBlocks[i].x, itemBlocks[i].y, width, height);
+        }
     }
 
     updatePosition(){
         this.changePositionSubImg();
         this.position.x += this.velocity.x;
         this.checkHorizontalCollisions();
+        // this.checkCollisionItems();
         this.gravedad();
         this.checkVerticalCollisions();
     }
@@ -70,6 +98,19 @@ export default class Character extends Level{
                         this.position.x = blocks.position.x + blocks.width + 0.01;
                         break;
                     }
+            }
+        }
+    }
+
+    checkCollisionItems(){
+        for(let i =0; i < itemBlocks.length; i++){
+            const item = itemBlocks[i];
+
+            if(this.position.y + this.height >= item.position.y &&
+                this.position.y <= item.position.y + item.height &&
+                this.position.x <= item.position.x + item.height &&
+                this.position.x + this.width >= item.position.x){
+                    console.log("touching items.");
             }
         }
     }

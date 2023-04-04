@@ -1,6 +1,6 @@
 import Character from "./character";
 import Level from "./level";
-import CollisionTest from "./collision";
+import Collision from "./collision";
 import { collision } from "../data/collisions";
 
 const KEYS = {
@@ -17,16 +17,17 @@ let collisionsMap = [];
 for(let i=0; i < collision.length; i += 93){
     collisionsMap.push(collision.slice(i, 93+i));
 }
-
 //creating the instance for the collisions
 const collisionBlocks = [];
 collisionsMap.forEach((row, y) => {
     row.forEach((ele, x) => {
         if(ele === 5156){
-            collisionBlocks.push(new CollisionTest({x: x * 12, y: y * 12 }));
+            collisionBlocks.push(new Collision({x: x * 12, y: y * 12 }));
         }
     });
 });
+
+//-----------------------------------------------------------------------
 
 const BACKGROUND = "./assets/fondo2.png";
 const STOPPED = "./assets/mainCharacters/ninjaFrog/Idle.png";
@@ -50,7 +51,7 @@ export default class Game {
     restart(){
         // creating instance of Character
         // animations is a 'library' that has all the animations
-        this.character = new Character({position:{x:50, y:50}, collisionBlocks, imageSrc: STOPPED, subImgs: 11,
+        this.character = new Character({position:{x:50, y:500}, collisionBlocks, imageSrc: STOPPED, subImgs: 11,
             animations: {
                 /*in the for to take the appropiate animation, we're gonna create
                 a new key-value (image: new Image()) */
