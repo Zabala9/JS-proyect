@@ -45,6 +45,7 @@ export default class Character2 extends Level2{
         this.widthBlock = 12;
         this.heightBlock = 12;
         this.lives = 3;
+        this.currentLevel = 2;
 
         this.events();
 
@@ -63,7 +64,7 @@ export default class Character2 extends Level2{
         p2.appendChild(p2Text);
 
         let p3 = document.createElement('P');
-        let p3Text = document.createTextNode('Level: ');
+        let p3Text = document.createTextNode(`Level: ${this.currentLevel}`);
         p3.setAttribute('id', 'p-footer');
         p3.appendChild(p3Text);
 
@@ -219,7 +220,7 @@ export default class Character2 extends Level2{
                         p2.appendChild(p2Text);
 
                         let p3 = document.createElement('P');
-                        let p3Text = document.createTextNode('Level: ');
+                        let p3Text = document.createTextNode(`Level: ${this.currentLevel}`);
                         p3.setAttribute('id', 'p-footer');
                         p3.appendChild(p3Text);
 
@@ -259,7 +260,7 @@ export default class Character2 extends Level2{
                 p2.appendChild(p2Text);
 
                 let p3 = document.createElement('P');
-                let p3Text = document.createTextNode('Level: ');
+                let p3Text = document.createTextNode(`Level: ${this.currentLevel}`);
                 p3.setAttribute('id', 'p-footer');
                 p3.appendChild(p3Text);
 
