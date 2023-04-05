@@ -8,6 +8,9 @@ const KEYS = {
     },
     a: {
         typed: false
+    },
+    c: {
+        typed: false
     }
 }
 
@@ -22,6 +25,8 @@ const FALLLEFT = "./assets/mainCharacters/ninjaFrog/FallLeft.png";
 const RUNLEFT = "./assets/mainCharacters/ninjaFrog/RunLeft.png";
 const IDLELEFT = "./assets/mainCharacters/ninjaFrog/IdleLeft.png";
 const JUMPLEFT = "./assets/mainCharacters/ninjaFrog/JumpLeft.png";
+const WALLJUMP = "./assets/mainCharacters/ninjaFrog/WallJump.png";
+const WALLJUMPLEFT = "./assets/mainCharacters/ninjaFrog/WallJumpLeft.png";
 
 export default class Game {
     constructor(canvas){
@@ -49,7 +54,9 @@ export default class Game {
                 Jump: { imageSrc: JUMP, subImgs: 1, velSubImg: 3 },
                 JumpLeft: { imageSrc: JUMPLEFT, subImgs: 1, velSubImg: 3 },
                 Fall: { imageSrc: FALL, subImgs: 1, velSubImg: 3 },
-                FallLeft: { imageSrc: FALLLEFT, subImgs: 1, velSubImg: 3 }
+                FallLeft: { imageSrc: FALLLEFT, subImgs: 1, velSubImg: 3 },
+                WallJump: { imageSrc: WALLJUMP, subImgs: 5, velSubImg: 3 },
+                WallJumpLeft: { imageSrc: WALLJUMPLEFT, subImgs: 5, velSubImg: 3 }
             }
         });
         this.level = new Level2({position: {x:0, y:0}, imageSrc: BACKGROUND, subImgs: 1 });
@@ -81,8 +88,14 @@ export default class Game {
         } else if(this.character.velocity.y === 0){
             if(this.character.lastDirection === 'right'){
                 this.character.swapAnimation('Idle');
+                if(KEYS.c.typed){
+                    this.character.swapAnimation('WallJump');
+                }
             } else {
                 this.character.swapAnimation('IdleLeft');
+                if(KEYS.c.typed){
+                    this.character.swapAnimation('WallJumpLeft');
+                }
             }
         }
 
@@ -119,6 +132,9 @@ export default class Game {
                         this.character.velocity.y = -13;
                     }
                     break;
+                case 'c':
+                    KEYS.c.typed = true;
+                    break;
             }
         });
 
@@ -134,7 +150,11 @@ export default class Game {
                 case 'ArrowLeft':
                     KEYS.a.typed = false;
                     break;
+                case 'c':
+                    KEYS.c.typed = false;
             }
         });
     }
 }
+
+export {KEYS};
