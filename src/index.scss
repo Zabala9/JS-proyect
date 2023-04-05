@@ -5,6 +5,28 @@ body {
     background-color: black;
 }
 
+#div-button{
+    display: flex;
+    margin-top: 110px;
+    flex-direction: column;
+}
+
+#button1, #button2{
+    color: red;
+    font-size: 40px;
+    font-style: oblique;
+    width: 100px;
+    height: 100px;
+}
+
+#button1{
+    margin-left: 720px;
+}
+
+#button2{
+    margin-left: 680px;
+}
+
 #p {
     border: 1px solid white;
     display: flex;
@@ -16,6 +38,15 @@ body {
     color: red;
     font-style: oblique;
     font-size: 40px;
+}
+
+#info{
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    font-size: 18px;
+    color: red;
+    font-style: italic;
 }
 
 #img{
