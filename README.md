@@ -1,7 +1,7 @@
 # Mister Poong
 
 <!-- ![My Image](Mister_Poong.png) -->
-<img src="Mister_Poong.png" width="390" height="250"></img>
+<img src="Mister_Poong.png" width="600" height="250"></img>
 
 ## Background
 
