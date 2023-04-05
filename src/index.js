@@ -28,12 +28,15 @@ document.addEventListener("DOMContentLoaded", ()=> {
         const list = document.getElementById('list');
 
         const firts = document.createElement('li');
-        firts.textContent = 'use the letters A and D to move to the sides';
+        firts.textContent = "use the letters 'A' and 'D' to move to the sides";
         const second = document.createElement('li');
-        second.textContent = 'user the spacebar to jump';
+        second.textContent = "user the 'spacebar' to jump";
+        const third = document.createElement('li');
+        third.textContent = "use the letter 'c' to destroy the red walls";
 
         list.append(firts);
         list.append(second);
+        list.append(third);
 
         const divlist = document.getElementById('instruction-list');
         const backButton = document.createElement('button');
@@ -44,6 +47,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         backButton.addEventListener('click', () => {
             list.removeChild(firts);
             list.removeChild(second);
+            list.removeChild(third);
             divlist.removeChild(backButton);
         });
     });
