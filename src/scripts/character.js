@@ -172,11 +172,18 @@ export default class Character extends Level2{
                     if(this.velocity.x < 0){
                         this.velocity.x = 0;
                         this.position.x = blockDestroy.position.x + blockDestroy.width + 0.01;
+                        if(KEYS.c.typed){
+                            destroyBlocks2.splice(i, 1);
+                        }
                         break;
                     }
                     if(this.velocity.x > 0){
                         this.velocity.x = 0;
                         this.position.x = blockDestroy.position.x - this.width - 0.01;
+                        if(KEYS.c.typed){
+                            destroyBlocks2.splice(i, destroyBlocks2.length);
+                        }
+                        break;
                     }
             }
             
