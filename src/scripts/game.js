@@ -23,7 +23,9 @@ export default class Game {
         this.dimensions = { width: canvas.width, height: canvas.height };
         //level1: x:50, y:500
         this.positionCharacter = {x:20, y:20};
+        this.pause = false;
 
+        this.events();
         this.restart();
     }
     // more methods
@@ -51,15 +53,24 @@ export default class Game {
     }
 
     animate(){
-        window.requestAnimationFrame(this.animate.bind(this));
-        this.ctx.fillStyle = "white";
-        this.ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
-        
-        // creating background
-        this.level.animate(this.ctx, this.dimensions);
+        if(!this.pause){
+            // creating background
+            this.level.animate(this.ctx, this.dimensions);
+            // calling animate from Character class
+            this.character.animate(this.ctx, this.dimensions);
+        }
 
-        // calling animate from Character class
-        this.character.animate(this.ctx, this.dimensions);
+        window.requestAnimationFrame(this.animate.bind(this));
+    }
+
+    events(){
+        document.getElementById('mister-game').addEventListener('click', () => {
+            if(this.pause){
+                this.pause = false;
+            } else {
+                this.pause = true;
+            }
+        });
     }
 }
 
