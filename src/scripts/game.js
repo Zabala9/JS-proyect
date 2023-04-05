@@ -2,18 +2,6 @@ import Character from "./character";
 // import Level from "./level";
 import Level2 from "./level2";
 
-const KEYS = {
-    d: {
-        typed: false,
-    },
-    a: {
-        typed: false
-    },
-    c: {
-        typed: false
-    }
-}
-
 //-----------------------------------------------------------------------
 
 const BACKGROUND = "./assets/fondo1.png";
@@ -37,7 +25,6 @@ export default class Game {
         this.positionCharacter = {x:20, y:20};
 
         this.restart();
-        this.events();
     }
     // more methods
     restart(){
@@ -73,88 +60,6 @@ export default class Game {
 
         // calling animate from Character class
         this.character.animate(this.ctx, this.dimensions);
-
-        //changing velocity if the key is press or typed
-        this.character.velocity.x = 0;
-        if(KEYS.d.typed){
-            /*when I press an expecific key I want to swap the animation */
-            this.character.swapAnimation('Run');
-            this.character.velocity.x = 3;
-            this.character.lastDirection = 'right';
-        } else if(KEYS.a.typed){
-            this.character.swapAnimation('RunLeft');
-            this.character.velocity.x = -3;
-            this.character.lastDirection = 'left';
-        } else if(this.character.velocity.y === 0){
-            if(this.character.lastDirection === 'right'){
-                this.character.swapAnimation('Idle');
-                if(KEYS.c.typed){
-                    this.character.swapAnimation('WallJump');
-                }
-            } else {
-                this.character.swapAnimation('IdleLeft');
-                if(KEYS.c.typed){
-                    this.character.swapAnimation('WallJumpLeft');
-                }
-            }
-        }
-
-        if(this.character.velocity.y < 0){
-            if(this.character.lastDirection === 'right'){
-                this.character.swapAnimation('Jump');
-            } else {
-                this.character.swapAnimation('JumpLeft');
-            }
-        } else if(this.character.velocity.y > 0){
-            if(this.character.lastDirection === 'right'){
-                this.character.swapAnimation('Fall');
-            } else {
-                this.character.swapAnimation('FallLeft');
-            }
-        }
-    }
-
-    events(){
-        window.addEventListener("keydown", (event)=> {
-            
-            //changing the typed to true if the key is typed.
-            switch(event.key){
-                case 'd':
-                case 'ArrowRight':
-                    KEYS.d.typed = true;
-                    break;
-                case 'a':
-                case 'ArrowLeft':
-                    KEYS.a.typed = true;
-                    break;
-                case ' ':
-                    if(this.character.velocity.y === 0){
-                        this.character.velocity.y = -13;
-                    }
-                    break;
-                case 'c':
-                    KEYS.c.typed = true;
-                    break;
-            }
-        });
-
-        // if the key is no typed this will be false again.
-        // in that way we can stop the character if the key is not press
-        window.addEventListener('keyup', (event)=> {
-            switch(event.key){
-                case 'd':
-                case 'ArrowRight':
-                    KEYS.d.typed = false;
-                    break;
-                case 'a':
-                case 'ArrowLeft':
-                    KEYS.a.typed = false;
-                    break;
-                case 'c':
-                    KEYS.c.typed = false;
-            }
-        });
     }
 }
 
-export {KEYS};

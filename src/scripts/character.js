@@ -3,6 +3,18 @@
 import Level2 from "./level2";
 import { collisionBlocks2, itemBlocks2, destroyBlocks2 } from "./level2";
 
+const KEYS = {
+    d: {
+        typed: false,
+    },
+    a: {
+        typed: false
+    },
+    c: {
+        typed: false
+    }
+}
+
 export default class Character extends Level2{
     constructor({ position, dimensionsCanvas, imageSrc, subImgs, animations }){
         super({ imageSrc, subImgs });
@@ -33,6 +45,8 @@ export default class Character extends Level2{
         this.widthBlock = 12;
         this.heightBlock = 12;
         this.lives = 3;
+
+        this.events();
 
         let footer = document.createElement('FOOTER');
         footer.setAttribute('id', 'footer');
@@ -73,6 +87,45 @@ export default class Character extends Level2{
     animate(ctx){
         this.draw(ctx);
         this.updatePosition();
+
+        //changing velocity if the key is press or typed
+        this.velocity.x = 0;
+        if(KEYS.d.typed){
+            /*when I press an expecific key I want to swap the animation */
+            this.swapAnimation('Run');
+            this.velocity.x = 3;
+            this.lastDirection = 'right';
+        } else if(KEYS.a.typed){
+            this.swapAnimation('RunLeft');
+            this.velocity.x = -3;
+            this.lastDirection = 'left';
+        } else if(this.velocity.y === 0){
+            if(this.lastDirection === 'right'){
+                this.swapAnimation('Idle');
+                if(KEYS.c.typed){
+                    this.swapAnimation('WallJump');
+                }
+            } else {
+                this.swapAnimation('IdleLeft');
+                if(KEYS.c.typed){
+                    this.swapAnimation('WallJumpLeft');
+                }
+            }
+        }
+
+        if(this.velocity.y < 0){
+            if(this.lastDirection === 'right'){
+                this.swapAnimation('Jump');
+            } else {
+                this.swapAnimation('JumpLeft');
+            }
+        } else if(this.velocity.y > 0){
+            if(this.lastDirection === 'right'){
+                this.swapAnimation('Fall');
+            } else {
+                this.swapAnimation('FallLeft');
+            }
+        }
 
         this.checkCharacterOutOfBounds();
     }
@@ -239,6 +292,48 @@ export default class Character extends Level2{
                     }
             }
         }
+    }
+
+    events(){
+        window.addEventListener("keydown", (event)=> {
+            
+            //changing the typed to true if the key is typed.
+            switch(event.key){
+                case 'd':
+                case 'ArrowRight':
+                    KEYS.d.typed = true;
+                    break;
+                case 'a':
+                case 'ArrowLeft':
+                    KEYS.a.typed = true;
+                    break;
+                case ' ':
+                    if(this.velocity.y === 0){
+                        this.velocity.y = -13;
+                    }
+                    break;
+                case 'c':
+                    KEYS.c.typed = true;
+                    break;
+            }
+        });
+
+        // if the key is no typed this will be false again.
+        // in that way we can stop the character if the key is not press
+        window.addEventListener('keyup', (event)=> {
+            switch(event.key){
+                case 'd':
+                case 'ArrowRight':
+                    KEYS.d.typed = false;
+                    break;
+                case 'a':
+                case 'ArrowLeft':
+                    KEYS.a.typed = false;
+                    break;
+                case 'c':
+                    KEYS.c.typed = false;
+            }
+        });
     }
 }
 
