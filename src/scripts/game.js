@@ -1,4 +1,4 @@
-import Character from "./character";
+import Character2 from "./character2";
 // import Level from "./level";
 import Level2 from "./level2";
 
@@ -30,7 +30,7 @@ export default class Game {
     restart(){
         // creating instance of Character
         // animations is a 'library' that has all the animations
-        this.character = new Character({position: this.positionCharacter, dimensionsCanvas: this.dimensions, imageSrc: STOPPED, subImgs: 11,
+        this.character = new Character2({position: this.positionCharacter, dimensionsCanvas: this.dimensions, imageSrc: STOPPED, subImgs: 11,
             animations: {
                 /*in the for to take the appropiate animation, we're gonna create
                 a new key-value (image: new Image()) */

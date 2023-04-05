@@ -15,7 +15,7 @@ const KEYS = {
     }
 }
 
-export default class Character extends Level2{
+export default class Character2 extends Level2{
     constructor({ position, dimensionsCanvas, imageSrc, subImgs, animations }){
         super({ imageSrc, subImgs });
         this.position = position;
