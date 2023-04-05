@@ -74,6 +74,21 @@ body {
   margin-left: 680px;
 }
 
+#button3 {
+  color: red;
+  font-size: 35px;
+  margin-top: 5px;
+  height: 70px;
+  background-color: rgb(54, 45, 45);
+  font-style: oblique;
+}
+
+li {
+  color: black;
+  font-size: 30;
+  font-style: oblique;
+}
+
 #p {
   border: 1px solid white;
   display: flex;
@@ -99,6 +114,13 @@ body {
 #img {
   width: 30px;
   height: 30px;
+}
+
+#instruction-list {
+  background-color: white;
+  position: fixed;
+  bottom: 150;
+  right: 250;
 }
 
 #mister-game {
