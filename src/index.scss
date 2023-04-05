@@ -39,6 +39,7 @@ body {
 
 ul{
     margin-top: 40px;
+    list-style: circle;
 }
 
 li{
@@ -77,11 +78,12 @@ li{
 }
 
 #instruction-list{
-    background-color: white;
+    background-color: bisque;
     position: absolute;
     left: 630px;
     top: 205px;
     height: 200px;
+    border-radius: 20px;
 }
 
 #mister-game{
