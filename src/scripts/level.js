@@ -1,3 +1,41 @@
+import Collision from "./collision";
+import { collision } from "../data/collisions1";
+import { items } from "../data/items1";
+import Item from "./item";
+
+const IMGITEM = "./assets/items/Strawberry.png";
+
+//creating 2D array for the collisions
+let collisionsMap = [];
+for(let i=0; i < collision.length; i += 93){
+    collisionsMap.push(collision.slice(i, 93+i));
+}
+//creating the instance for the collisions
+const collisionBlocks = [];
+collisionsMap.forEach((row, y) => {
+    row.forEach((ele, x) => {
+        if(ele === 5156){
+            collisionBlocks.push(new Collision({x: x * 12, y: y * 12 }));
+        }
+    });
+});
+
+//----------------------------------------------------------------------------------------------
+
+let itemsMap = [];
+for(let i=0; i < items.length; i+= 93){
+    itemsMap.push(items.slice(i, 93+i));
+}
+
+const itemBlocks = [];
+itemsMap.forEach((row, y) => {
+    row.forEach((ele, x) => {
+        if(ele === 10287){
+            itemBlocks.push(new Item({position: {x: x * 12, y: y * 12}, imageSource: IMGITEM, subImgs: 17}));
+        }
+    });
+});
+
 export default class Level {
     constructor({ position, imageSrc, subImgs = 1 }){
         this.position = position;
@@ -24,7 +62,6 @@ export default class Level {
 
         //how many subImg has a lapse since the creation of this animation
         this.lapseSubImg = 0;
-
     }
 
     draw(ctx){
@@ -45,6 +82,15 @@ export default class Level {
     animate(ctx){
         this.draw(ctx);
         this.changePositionSubImg();
+
+        //creating collision blocks
+        collisionBlocks.forEach(el => {
+            el.animate(ctx);
+        });
+
+        itemBlocks.forEach(el => {
+            el.animate(ctx);
+        });
     }
 
     changePositionSubImg(){
@@ -66,3 +112,4 @@ export default class Level {
 
 }
 
+export {itemBlocks, collisionBlocks};

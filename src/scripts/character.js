@@ -1,7 +1,8 @@
 import Level from "./level";
+import { collisionBlocks, itemBlocks } from "./level";
 
 export default class Character extends Level{
-    constructor({ position, dimensionsCanvas, collisionBlocks, collisionItems, imageSrc, subImgs, animations }){
+    constructor({ position, dimensionsCanvas, imageSrc, subImgs, animations }){
         super({ imageSrc, subImgs });
         this.position = position;
         this.dimensionsCanvas = dimensionsCanvas;
@@ -12,8 +13,6 @@ export default class Character extends Level{
 
         // velocity going down
         this.gravity = 0.5;
-        this.collisionBlocks = collisionBlocks;
-        this.collisionItems = collisionItems;
 
         this.animations = animations;
         this.lastDirection = 'right';
@@ -36,7 +35,7 @@ export default class Character extends Level{
         document.body.appendChild(footer);
 
         let p1 = document.createElement('P');
-        let p1Text = document.createTextNode(`Items to collect: ${this.collisionItems.length} `);
+        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
         p1.setAttribute('id', 'p-footer');
         p1.appendChild(p1Text);
 
@@ -71,10 +70,6 @@ export default class Character extends Level{
         this.draw(ctx);
         this.updatePosition();
 
-        this.collisionItems.forEach(el => {
-            el.animate(ctx);
-        });
-
         this.checkCharacterOutOfBounds();
     }
 
@@ -88,8 +83,8 @@ export default class Character extends Level{
     }
 
     checkHorizontalCollisions(){
-        for(let i=0; i < this.collisionBlocks.length; i++){
-            const blocks = this.collisionBlocks[i];
+        for(let i=0; i < collisionBlocks.length; i++){
+            const blocks = collisionBlocks[i];
 
             if(this.position.y + this.height >= blocks.position.y &&
                 this.position.y <= blocks.position.y + blocks.height &&
@@ -110,15 +105,15 @@ export default class Character extends Level{
     }
 
     checkCollisionItems(){
-        for(let i =0; i < this.collisionItems.length; i++){
-            const item = this.collisionItems[i];
+        for(let i =0; i < itemBlocks.length; i++){
+            const item = itemBlocks[i];
 
             if(this.position.y + this.height >= item.position.y &&
                 this.position.y <= item.position.y + this.heightItem &&
                 this.position.x <= item.position.x + this.widthItem &&
                 this.position.x + this.width >= item.position.x){
                     //deleting item when the collision happens
-                    this.collisionItems.splice(i, 1);
+                    itemBlocks.splice(i, 1);
 
                     const footerDel = document.getElementById('footer');
                     footerDel.remove();
@@ -128,7 +123,7 @@ export default class Character extends Level{
                         document.body.appendChild(footer);
 
                         let p1 = document.createElement('P');
-                        let p1Text = document.createTextNode(`Items to collect: ${this.collisionItems.length} `);
+                        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
                         p1.setAttribute('id', 'p-footer');
                         p1.appendChild(p1Text);
 
@@ -168,7 +163,7 @@ export default class Character extends Level{
                 document.body.appendChild(footer);
 
                 let p1 = document.createElement('P');
-                let p1Text = document.createTextNode(`Items to collect: ${this.collisionItems.length} `);
+                let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
                 p1.setAttribute('id', 'p-footer');
                 p1.appendChild(p1Text);
 
@@ -192,8 +187,8 @@ export default class Character extends Level{
     }
 
     checkVerticalCollisions(){
-        for(let i=0; i < this.collisionBlocks.length; i++){
-            const blocks = this.collisionBlocks[i];
+        for(let i=0; i < collisionBlocks.length; i++){
+            const blocks = collisionBlocks[i];
 
             /*first statement: check if the bottom of our player intersect with the top
                             of the collision block
