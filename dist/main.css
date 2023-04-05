@@ -52,6 +52,11 @@ body {
   background-color: black;
 }
 
+.title {
+  display: flex;
+  justify-content: center;
+}
+
 #div-button {
   display: flex;
   margin-top: 110px;
@@ -101,7 +106,7 @@ li {
   border: 1px solid white;
   display: flex;
   margin-top: 10px;
-  margin-left: 650px;
+  margin-right: 30px;
   width: 250px;
   justify-content: center;
   align-items: center;
@@ -122,6 +127,13 @@ li {
 #img {
   width: 30px;
   height: 30px;
+}
+
+#linkedin {
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+  border-radius: 80px;
 }
 
 #instruction-list {
