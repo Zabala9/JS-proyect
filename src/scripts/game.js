@@ -1,7 +1,11 @@
 import Character from "./character";
 import Level from "./level";
 import Collision from "./collision";
-import { collision } from "../data/collisions";
+import { collision } from "../data/collisions1";
+import { items } from "../data/items1";
+import Item from "./item";
+
+const IMGITEM = "./assets/items/Strawberry.png";
 
 const KEYS = {
     d: {
@@ -23,6 +27,22 @@ collisionsMap.forEach((row, y) => {
     row.forEach((ele, x) => {
         if(ele === 5156){
             collisionBlocks.push(new Collision({x: x * 12, y: y * 12 }));
+        }
+    });
+});
+
+//----------------------------------------------------------------------------------------------
+
+let itemsMap = [];
+for(let i=0; i < items.length; i+= 93){
+    itemsMap.push(items.slice(i, 93+i));
+}
+
+const itemBlocks = [];
+itemsMap.forEach((row, y) => {
+    row.forEach((ele, x) => {
+        if(ele === 10287){
+            itemBlocks.push(new Item({position: {x: x * 12, y: y * 12}, imageSource: IMGITEM, subImgs: 17}));
         }
     });
 });
@@ -53,7 +73,7 @@ export default class Game {
     restart(){
         // creating instance of Character
         // animations is a 'library' that has all the animations
-        this.character = new Character({position: this.positionCharacter, dimensionsCanvas: this.dimensions, collisionBlocks, imageSrc: STOPPED, subImgs: 11,
+        this.character = new Character({position: this.positionCharacter, dimensionsCanvas: this.dimensions, collisionBlocks, collisionItems: itemBlocks, imageSrc: STOPPED, subImgs: 11,
             animations: {
                 /*in the for to take the appropiate animation, we're gonna create
                 a new key-value (image: new Image()) */
