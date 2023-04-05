@@ -1,5 +1,6 @@
 import Character from "./character";
-import Level from "./level";
+// import Level from "./level";
+import Level2 from "./level2";
 
 const KEYS = {
     d: {
@@ -12,7 +13,7 @@ const KEYS = {
 
 //-----------------------------------------------------------------------
 
-const BACKGROUND = "./assets/fondo2.png";
+const BACKGROUND = "./assets/fondo1.png";
 const STOPPED = "./assets/mainCharacters/ninjaFrog/Idle.png";
 const RUN = "./assets/mainCharacters/ninjaFrog/Run.png";
 const JUMP = "./assets/mainCharacters/ninjaFrog/Jump.png";
@@ -27,7 +28,8 @@ export default class Game {
         // initialize canvas
         this.ctx = canvas.getContext("2d");
         this.dimensions = { width: canvas.width, height: canvas.height };
-        this.positionCharacter = {x:50, y:500};
+        //level1: x:50, y:500
+        this.positionCharacter = {x:20, y:20};
 
         this.restart();
         this.events();
@@ -50,7 +52,7 @@ export default class Game {
                 FallLeft: { imageSrc: FALLLEFT, subImgs: 1, velSubImg: 3 }
             }
         });
-        this.level = new Level({position: {x:0, y:0}, imageSrc: BACKGROUND, subImgs: 1 });
+        this.level = new Level2({position: {x:0, y:0}, imageSrc: BACKGROUND, subImgs: 1 });
         this.animate();
     }
 

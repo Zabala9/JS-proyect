@@ -1,7 +1,9 @@
-import Level from "./level";
-import { collisionBlocks, itemBlocks } from "./level";
+// import Level from "./level";
+// import { collisionBlocks, itemBlocks } from "./level";
+import Level2 from "./level2";
+import { collisionBlocks2, itemBlocks2, destroyBlocks2 } from "./level2";
 
-export default class Character extends Level{
+export default class Character extends Level2{
     constructor({ position, dimensionsCanvas, imageSrc, subImgs, animations }){
         super({ imageSrc, subImgs });
         this.position = position;
@@ -28,6 +30,8 @@ export default class Character extends Level{
 
         this.widthItem = 10;
         this.heightItem = 10;
+        this.widthBlock = 12;
+        this.heightBlock = 12;
         this.lives = 3;
 
         let footer = document.createElement('FOOTER');
@@ -35,7 +39,7 @@ export default class Character extends Level{
         document.body.appendChild(footer);
 
         let p1 = document.createElement('P');
-        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
+        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks2.length} `);
         p1.setAttribute('id', 'p-footer');
         p1.appendChild(p1Text);
 
@@ -77,14 +81,15 @@ export default class Character extends Level{
         this.changePositionSubImg();
         this.position.x += this.velocity.x;
         this.checkHorizontalCollisions();
+        this.checkCollisionDestroy();
         this.checkCollisionItems();
         this.gravedad();
         this.checkVerticalCollisions();
     }
 
     checkHorizontalCollisions(){
-        for(let i=0; i < collisionBlocks.length; i++){
-            const blocks = collisionBlocks[i];
+        for(let i=0; i < collisionBlocks2.length; i++){
+            const blocks = collisionBlocks2[i];
 
             if(this.position.y + this.height >= blocks.position.y &&
                 this.position.y <= blocks.position.y + blocks.height &&
@@ -104,16 +109,37 @@ export default class Character extends Level{
         }
     }
 
+    checkCollisionDestroy(){
+        for (let i = 0; i < destroyBlocks2.length; i++) {
+            const blockDestroy = destroyBlocks2[i];
+            // console.log(blockDestroy);
+
+            if (this.position.x + this.width >= blockDestroy.position.x &&
+                this.position.x <= blockDestroy.position.x + this.width) {
+                    if(this.velocity.x < 0){
+                        this.velocity.x = 0;
+                        this.position.x = blockDestroy.position.x + blockDestroy.width + 0.01;
+                        break;
+                    }
+                    if(this.velocity.x > 0){
+                        this.velocity.x = 0;
+                        this.position.x = blockDestroy.position.x - this.width - 0.01;
+                    }
+            }
+            
+        }
+    }
+
     checkCollisionItems(){
-        for(let i =0; i < itemBlocks.length; i++){
-            const item = itemBlocks[i];
+        for(let i =0; i < itemBlocks2.length; i++){
+            const item = itemBlocks2[i];
 
             if(this.position.y + this.height >= item.position.y &&
                 this.position.y <= item.position.y + this.heightItem &&
                 this.position.x <= item.position.x + this.widthItem &&
                 this.position.x + this.width >= item.position.x){
                     //deleting item when the collision happens
-                    itemBlocks.splice(i, 1);
+                    itemBlocks2.splice(i, 1);
 
                     const footerDel = document.getElementById('footer');
                     footerDel.remove();
@@ -123,7 +149,7 @@ export default class Character extends Level{
                         document.body.appendChild(footer);
 
                         let p1 = document.createElement('P');
-                        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
+                        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks2.length} `);
                         p1.setAttribute('id', 'p-footer');
                         p1.appendChild(p1Text);
 
@@ -163,7 +189,7 @@ export default class Character extends Level{
                 document.body.appendChild(footer);
 
                 let p1 = document.createElement('P');
-                let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
+                let p1Text = document.createTextNode(`Items to collect: ${itemBlocks2.length} `);
                 p1.setAttribute('id', 'p-footer');
                 p1.appendChild(p1Text);
 
@@ -181,14 +207,14 @@ export default class Character extends Level{
                 footer.appendChild(p2);
                 footer.appendChild(p3);
 
-            this.position.x = 50;
-            this.position.y = 500;
+            this.position.x = 20;
+            this.position.y = 20;
         }
     }
 
     checkVerticalCollisions(){
-        for(let i=0; i < collisionBlocks.length; i++){
-            const blocks = collisionBlocks[i];
+        for(let i=0; i < collisionBlocks2.length; i++){
+            const blocks = collisionBlocks2[i];
 
             /*first statement: check if the bottom of our player intersect with the top
                             of the collision block
