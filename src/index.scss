@@ -30,16 +30,23 @@ body {
 #button3{
     color: red;
     font-size: 35px;
-    margin-top: 5px;
-    height: 70px;
+    margin-top: 50px;
+    height: 40px;
     background-color: rgb(54, 45, 45);
     font-style: oblique;
+    margin-left: 100px;
+}
+
+ul{
+    margin-top: 40px;
 }
 
 li{
     color: black;
     font-size: 30;
     font-style: oblique;
+    margin-left: 15px;
+    margin-top: 2px;
 }
 
 #p {
@@ -71,9 +78,10 @@ li{
 
 #instruction-list{
     background-color: white;
-    position: fixed;
-    bottom: 150;
-    right: 250;
+    position: absolute;
+    left: 630px;
+    top: 205px;
+    height: 200px;
 }
 
 #mister-game{
