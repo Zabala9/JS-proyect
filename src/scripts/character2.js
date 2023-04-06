@@ -168,7 +168,9 @@ export default class Character2 extends Level2{
             const blockDestroy = destroyBlocks2[i];
             // console.log(blockDestroy);
 
-            if (this.position.x + this.width >= blockDestroy.position.x &&
+            if (this.position.y + this.height >= blockDestroy.position.y &&
+                this.position.y <= blockDestroy.position.y + blockDestroy.height && 
+                this.position.x + this.width >= blockDestroy.position.x &&
                 this.position.x <= blockDestroy.position.x + this.width) {
                     if(this.velocity.x < 0){
                         this.velocity.x = 0;
