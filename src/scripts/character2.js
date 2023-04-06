@@ -1,5 +1,3 @@
-// import Level from "./level";
-// import { collisionBlocks, itemBlocks } from "./level";
 import Level2 from "./level2";
 import { collisionBlocks2, itemBlocks2, destroyBlocks2 } from "./level2";
 
@@ -14,6 +12,9 @@ const KEYS = {
         typed: false
     }
 }
+
+let lives = 3;
+let currentLevel = 2;
 
 export default class Character2 extends Level2{
     constructor({ position, dimensionsCanvas, imageSrc, subImgs, animations }){
@@ -44,8 +45,6 @@ export default class Character2 extends Level2{
         this.heightItem = 10;
         this.widthBlock = 12;
         this.heightBlock = 12;
-        this.lives = 3;
-        this.currentLevel = 2;
 
         this.events();
 
@@ -59,12 +58,12 @@ export default class Character2 extends Level2{
         p1.appendChild(p1Text);
 
         let p2 = document.createElement('P');
-        let p2Text = document.createTextNode(`Lives: ${this.lives}`);
+        let p2Text = document.createTextNode(`Lives: ${lives}`);
         p2.setAttribute('id', 'p-footer');
         p2.appendChild(p2Text);
 
         let p3 = document.createElement('P');
-        let p3Text = document.createTextNode(`Level: ${this.currentLevel}`);
+        let p3Text = document.createTextNode(`Level: ${currentLevel}`);
         p3.setAttribute('id', 'p-footer');
         p3.appendChild(p3Text);
 
@@ -86,6 +85,7 @@ export default class Character2 extends Level2{
     }
 
     animate(ctx){
+
         this.draw(ctx);
         this.updatePosition();
 
@@ -215,12 +215,12 @@ export default class Character2 extends Level2{
                         p1.appendChild(p1Text);
 
                         let p2 = document.createElement('P');
-                        let p2Text = document.createTextNode(`Lives: ${this.lives}`);
+                        let p2Text = document.createTextNode(`Lives: ${lives}`);
                         p2.setAttribute('id', 'p-footer');
                         p2.appendChild(p2Text);
 
                         let p3 = document.createElement('P');
-                        let p3Text = document.createTextNode(`Level: ${this.currentLevel}`);
+                        let p3Text = document.createTextNode(`Level: ${currentLevel}`);
                         p3.setAttribute('id', 'p-footer');
                         p3.appendChild(p3Text);
 
@@ -255,12 +255,12 @@ export default class Character2 extends Level2{
                 p1.appendChild(p1Text);
 
                 let p2 = document.createElement('P');
-                let p2Text = document.createTextNode(`Lives: ${this.lives}`);
+                let p2Text = document.createTextNode(`Lives: ${lives}`);
                 p2.setAttribute('id', 'p-footer');
                 p2.appendChild(p2Text);
 
                 let p3 = document.createElement('P');
-                let p3Text = document.createTextNode(`Level: ${this.currentLevel}`);
+                let p3Text = document.createTextNode(`Level: ${currentLevel}`);
                 p3.setAttribute('id', 'p-footer');
                 p3.appendChild(p3Text);
 
@@ -345,3 +345,4 @@ export default class Character2 extends Level2{
     }
 }
 
+export {itemBlocks2, lives, currentLevel};

@@ -1,6 +1,7 @@
 import Character2 from "./character2";
-// import Level from "./level";
 import Level2 from "./level2";
+import { itemBlocks2 } from "./level2";
+import { currentLevel, lives } from "./character2";
 
 //-----------------------------------------------------------------------
 
@@ -27,6 +28,7 @@ export default class Game {
 
         this.events();
         this.restart();
+        this.currentLevel = 1;
     }
     // more methods
     restart(){
@@ -53,6 +55,8 @@ export default class Game {
     }
 
     animate(){
+        let gameRun = window.requestAnimationFrame(this.animate.bind(this));
+
         if(!this.pause){
             // creating background
             this.level.animate(this.ctx, this.dimensions);
@@ -60,7 +64,40 @@ export default class Game {
             this.character.animate(this.ctx, this.dimensions);
         }
 
-        window.requestAnimationFrame(this.animate.bind(this));
+        if(itemBlocks2.length === 0){
+
+            const divCover = document.createElement('div');
+            const footerDelete = document.getElementById('footer');
+            footerDelete.remove();
+            divCover.setAttribute('id', 'div-cover');
+            const prg = document.createElement('label');
+            prg.setAttribute('id', 'won');
+            prg.textContent = "Congrats! you won!!";
+            const prg2 = document.createElement('label');
+            prg2.setAttribute('id', 'won2');
+            prg2.textContent = "If you want to play again press 'restart'"
+            const buttonRestart = document.createElement('a');
+            buttonRestart.setAttribute('id', 'button-restart');
+            buttonRestart.setAttribute('href', 'file:///C:/Users/steve/Downloads/JS-Project/index.html');
+            buttonRestart.textContent = 'Restart';
+
+            divCover.append(prg);
+            divCover.append(prg2);
+            divCover.append(buttonRestart);
+            document.body.append(divCover);
+            
+
+            buttonRestart.addEventListener('click', () => {
+                this.currentLevel = 1;
+                this.restart();
+                const divCoverDelete = document.getElementById('div-cover');
+                divCoverDelete.remove();
+            });
+
+            cancelAnimationFrame(gameRun);
+
+        }
+
     }
 
     events(){

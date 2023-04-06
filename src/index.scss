@@ -107,6 +107,42 @@ li{
     margin-top: 5px;
 }
 
+#div-cover{
+    background-color: black;
+    width: 1130px;
+    height: 600px;
+    position: absolute;
+    top: 64px;
+    left: 225px;
+}
+
+#won{
+    color: red;
+    font-style: oblique;
+    font-size: 30px;
+    position: absolute;
+    left: 440px;
+    top: 170px;
+}
+
+#won2{
+    color: red;
+    font-style: oblique;
+    font-size: 30px;
+    position: absolute;
+    left: 300px;
+    top: 250px;
+}
+
+#button-restart{
+    color: red;
+    font-size: 30px;
+    background-color: #5b4444;
+    position: absolute;
+    left: 520px;
+    top: 320px;
+}
+
 #footer{
     display: flex;
     // flex-direction: row;
