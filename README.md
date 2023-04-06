@@ -10,6 +10,8 @@ different items and rewards.
 This game will also have some challenging parts where the player needs to use the different character abilities 
 in order to pass to the next level.
 
+You can try it [here](https://zabala9.github.io/Mister-Poong/)
+
 ------------------------------------------------------------------------------------------------------------------------
 
 ## Functionality & MVPs
