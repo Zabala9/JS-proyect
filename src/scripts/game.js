@@ -102,6 +102,35 @@ export default class Game {
 
             cancelAnimationFrame(gameRun);
 
+        } else if(lives === 0){
+            const divCover = document.createElement('div');
+            const footerDelete = document.getElementById('footer');
+            footerDelete.remove();
+            divCover.setAttribute('id', 'div-cover');
+            const prg = document.createElement('label');
+            prg.setAttribute('id', 'lose');
+            prg.textContent = "Oh no! You lose all your lives!!";
+            const prg2 = document.createElement('label');
+            prg2.setAttribute('id', 'lose2');
+            prg2.textContent = "You can try it again clicking 'star over'"
+            const buttonRestart = document.createElement('a');
+            buttonRestart.setAttribute('id', 'button-restart');
+            buttonRestart.setAttribute('href', 'https://zabala9.github.io/Mister-Poong/');
+            buttonRestart.textContent = 'Star over';
+
+            divCover.append(prg);
+            divCover.append(prg2);
+            divCover.append(buttonRestart);
+            document.body.append(divCover);
+
+            buttonRestart.addEventListener('click', () => {
+                this.currentLevel = 1;
+                this.restart();
+                const divCoverDelete = document.getElementById('div-cover');
+                divCoverDelete.remove();
+            });
+
+            cancelAnimationFrame(gameRun);
         }
 
     }
