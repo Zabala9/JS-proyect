@@ -208,7 +208,7 @@ li {
   top: 320px;
 }
 
-#footer {
+#footer1, #footer {
   display: flex;
   justify-content: space-evenly;
 }

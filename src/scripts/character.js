@@ -1,5 +1,4 @@
-import Level2 from "./level2";
-import { collisionBlocks2, itemBlocks2, destroyBlocks2 } from "./level2";
+import Level, { collisionBlocks, itemBlocks } from "./level";
 
 const KEYS = {
     d: {
@@ -13,10 +12,10 @@ const KEYS = {
     }
 }
 
-let lives = 3;
-let currentLevel = 2;
+let lives1 = 3;
+let currentLevel = 1;
 
-export default class Character2 extends Level2{
+export default class Character extends Level{
     constructor({ position, dimensionsCanvas, imageSrc, subImgs, animations }){
         super({ imageSrc, subImgs });
         this.position = position;
@@ -49,16 +48,16 @@ export default class Character2 extends Level2{
         this.events();
 
         let footer = document.createElement('FOOTER');
-        footer.setAttribute('id', 'footer');
+        footer.setAttribute('id', 'footer1');
         document.body.appendChild(footer);
 
         let p1 = document.createElement('P');
-        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks2.length} `);
+        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
         p1.setAttribute('id', 'p-footer');
         p1.appendChild(p1Text);
 
         let p2 = document.createElement('P');
-        let p2Text = document.createTextNode(`Lives: ${lives}`);
+        let p2Text = document.createTextNode(`Lives: ${lives1}`);
         p2.setAttribute('id', 'p-footer');
         p2.appendChild(p2Text);
 
@@ -130,20 +129,19 @@ export default class Character2 extends Level2{
 
         this.checkCharacterOutOfBounds();
     }
-
+    
     updatePosition(){
         this.changePositionSubImg();
         this.position.x += this.velocity.x;
         this.checkHorizontalCollisions();
-        this.checkCollisionDestroy();
         this.checkCollisionItems();
         this.gravedad();
         this.checkVerticalCollisions();
     }
 
     checkHorizontalCollisions(){
-        for(let i=0; i < collisionBlocks2.length; i++){
-            const blocks = collisionBlocks2[i];
+        for(let i=0; i < collisionBlocks.length; i++){
+            const blocks = collisionBlocks[i];
 
             if(this.position.y + this.height >= blocks.position.y &&
                 this.position.y <= blocks.position.y + blocks.height &&
@@ -163,59 +161,31 @@ export default class Character2 extends Level2{
         }
     }
 
-    checkCollisionDestroy(){
-        for (let i = 0; i < destroyBlocks2.length; i++) {
-            const blockDestroy = destroyBlocks2[i];
-            // console.log(blockDestroy);
-
-            if (this.position.x + this.width >= blockDestroy.position.x &&
-                this.position.x <= blockDestroy.position.x + this.width) {
-                    if(this.velocity.x < 0){
-                        this.velocity.x = 0;
-                        this.position.x = blockDestroy.position.x + blockDestroy.width + 0.01;
-                        if(KEYS.c.typed){
-                            destroyBlocks2.splice(i, 1);
-                        }
-                        break;
-                    }
-                    if(this.velocity.x > 0){
-                        this.velocity.x = 0;
-                        this.position.x = blockDestroy.position.x - this.width - 0.01;
-                        if(KEYS.c.typed){
-                            destroyBlocks2.splice(i, destroyBlocks2.length);
-                        }
-                        break;
-                    }
-            }
-            
-        }
-    }
-
     checkCollisionItems(){
-        for(let i =0; i < itemBlocks2.length; i++){
-            const item = itemBlocks2[i];
+        for(let i =0; i < itemBlocks.length; i++){
+            const item = itemBlocks[i];
 
             if(this.position.y + this.height >= item.position.y &&
                 this.position.y <= item.position.y + this.heightItem &&
                 this.position.x <= item.position.x + this.widthItem &&
                 this.position.x + this.width >= item.position.x){
                     //deleting item when the collision happens
-                    itemBlocks2.splice(i, 1);
+                    itemBlocks.splice(i, 1);
 
-                    const footerDel = document.getElementById('footer');
+                    const footerDel = document.getElementById('footer1');
                     footerDel.remove();
 
                     let footer = document.createElement('FOOTER');
-                        footer.setAttribute('id', 'footer');
+                        footer.setAttribute('id', 'footer1');
                         document.body.appendChild(footer);
 
                         let p1 = document.createElement('P');
-                        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks2.length} `);
+                        let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
                         p1.setAttribute('id', 'p-footer');
                         p1.appendChild(p1Text);
 
                         let p2 = document.createElement('P');
-                        let p2Text = document.createTextNode(`Lives: ${lives}`);
+                        let p2Text = document.createTextNode(`Lives: ${lives1}`);
                         p2.setAttribute('id', 'p-footer');
                         p2.appendChild(p2Text);
 
@@ -240,22 +210,22 @@ export default class Character2 extends Level2{
 
     checkCharacterOutOfBounds(){
         if(this.position.y + this.width > this.dimensionsCanvas.height){
-            lives = lives-1;
+            lives1 = lives1-1;
 
-            const footerDel = document.getElementById('footer');
+            const footerDel = document.getElementById('footer1');
             footerDel.remove();
 
             let footer = document.createElement('FOOTER');
-                footer.setAttribute('id', 'footer');
+                footer.setAttribute('id', 'footer1');
                 document.body.appendChild(footer);
 
                 let p1 = document.createElement('P');
-                let p1Text = document.createTextNode(`Items to collect: ${itemBlocks2.length} `);
+                let p1Text = document.createTextNode(`Items to collect: ${itemBlocks.length} `);
                 p1.setAttribute('id', 'p-footer');
                 p1.appendChild(p1Text);
 
                 let p2 = document.createElement('P');
-                let p2Text = document.createTextNode(`Lives: ${lives}`);
+                let p2Text = document.createTextNode(`Lives: ${lives1}`);
                 p2.setAttribute('id', 'p-footer');
                 p2.appendChild(p2Text);
 
@@ -269,13 +239,13 @@ export default class Character2 extends Level2{
                 footer.appendChild(p3);
 
             this.position.x = 20;
-            this.position.y = 20;
+            this.position.y = 500;
         }
     }
 
     checkVerticalCollisions(){
-        for(let i=0; i < collisionBlocks2.length; i++){
-            const blocks = collisionBlocks2[i];
+        for(let i=0; i < collisionBlocks.length; i++){
+            const blocks = collisionBlocks[i];
 
             /*first statement: check if the bottom of our player intersect with the top
                             of the collision block
@@ -345,4 +315,4 @@ export default class Character2 extends Level2{
     }
 }
 
-export {itemBlocks2, lives, currentLevel};
+export {itemBlocks, lives1, currentLevel};

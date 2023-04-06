@@ -1,7 +1,6 @@
 import Collision from "./collision";
-import { collision } from "../data/collisions1";
-import { items } from "../data/items1";
 import Item from "./item";
+import { collision, items } from "../data/firstLevel";
 
 const IMGITEM = "./assets/items/Strawberry.png";
 
