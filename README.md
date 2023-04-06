@@ -17,9 +17,10 @@ You can try it clicking [here!](https://zabala9.github.io/Mister-Poong/)
 ## Functionality & MVPs
 
 ### In Mister Poong, users will be able to:
-- The player can walk, jump, destoy walls, invert the gravity, swim, grab elements.
+- The player can walk, jump and destroy walls.
+- The player is able to pause the game.
 - Advance from one level to the next by collecting all the items.
-- The player starts with 3 lifes and the game will over if lose all lives falling into the gaps or lava.
+- The player starts with 3 lifes and the game will over if lose all lives falling into the gaps.
 
 ### In adition this project will include:
 - instructions
@@ -31,11 +32,14 @@ You can try it clicking [here!](https://zabala9.github.io/Mister-Poong/)
 
 <img src="Wireframe.png" width="500" height="300"></img>
 
+- nav links include links to this project's Github repo and my LinkedIn.
+
 -------------------------------------------------------------------------------------------------------------------------
 
 ## Technologies
 - JavaScript
 - Webpack
+- npm
 - HTML canvas
 - CSS
 
@@ -47,4 +51,4 @@ You can try it clicking [here!](https://zabala9.github.io/Mister-Poong/)
 - Monday: Introduce the abilities for the character.
 - Tuesday: Include instruction page.
 - Wednesday: Introduce multiple levels.
-- Thursday morning: Refine last details.
+- Thursday morning: Refine last details and deploy to Github pages.
