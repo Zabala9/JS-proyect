@@ -33,10 +33,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
         second.textContent = "user the 'spacebar' to jump";
         const third = document.createElement('li');
         third.textContent = "use the letter 'c' to destroy the red walls";
+        const fourth = document.createElement('li');
+        fourth.textContent = "You can pause the game with the letter 'p'";
 
         list.append(firts);
         list.append(second);
         list.append(third);
+        list.append(fourth);
 
         const divlist = document.getElementById('instruction-list');
         const backButton = document.createElement('button');
@@ -48,6 +51,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
             list.removeChild(firts);
             list.removeChild(second);
             list.removeChild(third);
+            list.removeChild(fourth);
             divlist.removeChild(backButton);
         });
     });

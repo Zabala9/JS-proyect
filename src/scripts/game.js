@@ -17,6 +17,12 @@ const JUMPLEFT = "./assets/mainCharacters/ninjaFrog/JumpLeft.png";
 const WALLJUMP = "./assets/mainCharacters/ninjaFrog/WallJump.png";
 const WALLJUMPLEFT = "./assets/mainCharacters/ninjaFrog/WallJumpLeft.png";
 
+// const keys = {
+//     p: {
+//         status: false
+//     }
+// }
+
 export default class Game {
     constructor(canvas){
         // initialize canvas
@@ -78,7 +84,7 @@ export default class Game {
             prg2.textContent = "If you want to play again press 'restart'"
             const buttonRestart = document.createElement('a');
             buttonRestart.setAttribute('id', 'button-restart');
-            buttonRestart.setAttribute('href', 'file:///C:/Users/steve/Downloads/JS-Project/index.html');
+            buttonRestart.setAttribute('href', 'https://zabala9.github.io/Mister-Poong/');
             buttonRestart.textContent = 'Restart';
 
             divCover.append(prg);
@@ -101,11 +107,14 @@ export default class Game {
     }
 
     events(){
-        document.getElementById('mister-game').addEventListener('click', () => {
-            if(this.pause){
-                this.pause = false;
-            } else {
-                this.pause = true;
+        window.addEventListener('keydown', (event) => {
+            switch(event.key){
+                case 'p':
+                    if(this.pause){
+                        this.pause = false;
+                    } else {
+                        this.pause = true;
+                    }
             }
         });
     }

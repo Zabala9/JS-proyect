@@ -14,7 +14,7 @@ const KEYS = {
 }
 
 let lives = 3;
-let currentLevel = 2;
+let currentLevel = 1;
 
 export default class Character2 extends Level2{
     constructor({ position, dimensionsCanvas, imageSrc, subImgs, animations }){
@@ -240,7 +240,7 @@ export default class Character2 extends Level2{
 
     checkCharacterOutOfBounds(){
         if(this.position.y + this.width > this.dimensionsCanvas.height){
-            this.lives--;
+            lives = lives-1;
 
             const footerDel = document.getElementById('footer');
             footerDel.remove();
