@@ -109,6 +109,9 @@ export default class Game {
             const footerDelete = document.getElementById('footer1');
             footerDelete.remove();
             divCover.setAttribute('id', 'div-cover');
+            const divContainer = document.createElement('div');
+            const divContainer2 = document.createElement('div');
+            const divContainer3 = document.createElement('div');
             const prg = document.createElement('label');
             prg.setAttribute('id', 'lose');
             prg.textContent = "Oh no! You lose all your lives!!";
@@ -120,9 +123,12 @@ export default class Game {
             buttonRestart.setAttribute('href', 'https://zabala9.github.io/Mister-Poong/');
             buttonRestart.textContent = 'Star over';
 
-            divCover.append(prg);
-            divCover.append(prg2);
-            divCover.append(buttonRestart);
+            divContainer.append(prg);
+            divContainer2.append(prg2);
+            divContainer3.append(buttonRestart);
+            divCover.append(divContainer);
+            divCover.append(divContainer2);
+            divCover.append(divContainer3);
             document.body.append(divCover);
 
             buttonRestart.addEventListener('click', () => {

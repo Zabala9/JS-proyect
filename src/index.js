@@ -25,7 +25,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
     });
 
     instructions.addEventListener('click', () => {
-        const list = document.getElementById('list');
+        // const list = document.getElementById('list');
+        const containerList = document.createElement('div');
+        containerList.setAttribute('id', 'instruction-list');
+        const list = document.createElement('ul');
 
         const firts = document.createElement('li');
         firts.textContent = "use the letters 'A' and 'D' to move to the sides";
@@ -40,19 +43,21 @@ document.addEventListener("DOMContentLoaded", ()=> {
         list.append(second);
         list.append(third);
         list.append(fourth);
+        containerList.append(list);
 
-        const divlist = document.getElementById('instruction-list');
+        const divContainerList = document.getElementById('container-instructions');
         const backButton = document.createElement('button');
         backButton.textContent = 'close';
         backButton.setAttribute('id', 'button3')
-        divlist.append(backButton);
+        containerList.append(backButton);
+        divContainerList.append(containerList);
 
         backButton.addEventListener('click', () => {
-            list.removeChild(firts);
-            list.removeChild(second);
-            list.removeChild(third);
-            list.removeChild(fourth);
-            divlist.removeChild(backButton);
+            // list.removeChild(firts);
+            // list.removeChild(second);
+            // list.removeChild(third);
+            // list.removeChild(fourth);
+            divContainerList.removeChild(containerList);
         });
     });
 });
