@@ -57,6 +57,17 @@ body {
   justify-content: center;
 }
 
+#button-instructions {
+  background-color: black;
+  color: white;
+  padding: 1px;
+  border-radius: 100px;
+  font-size: 20px;
+  position: relative;
+  top: -560px;
+  left: 1110px;
+}
+
 #div-button {
   display: flex;
   margin-top: 110px;
@@ -159,8 +170,11 @@ li {
   border-radius: 20px;
 }
 
-#mister-game {
+#div-canvas {
   margin-left: calc(50% - 558px);
+}
+
+#mister-game {
   margin-top: 5px;
 }
 
@@ -176,8 +190,9 @@ li {
   color: red;
   font-style: oblique;
   font-size: 30px;
+  width: 250px;
   position: absolute;
-  left: 440px;
+  left: calc(50% - 125px);
   top: 170px;
 }
 
@@ -185,8 +200,9 @@ li {
   color: red;
   font-style: oblique;
   font-size: 30px;
+  width: 475px;
   position: absolute;
-  left: 300px;
+  left: calc(50% - 237px);
   top: 250px;
 }
 
@@ -215,8 +231,8 @@ li {
   font-size: 30px;
   background-color: #5b4444;
   position: absolute;
-  width: 110px;
-  margin-left: calc(50% - 55px);
+  width: 85px;
+  margin-left: calc(50% - 42px);
   padding: 5px;
   border-radius: 10px;
   top: 320px;

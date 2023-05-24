@@ -28,14 +28,15 @@ export default class Game {
         this.ctx = canvas.getContext("2d");
         this.dimensions = { width: canvas.width, height: canvas.height };
         //level1: x:50, y:500
+        this.buttonInstructions = document.getElementById('button-instructions');
         this.positionCharacter1 = {x:20, y: 500};
         this.positionCharacter2 = {x:20, y:20};
         this.pause = false;
 
         this.currentLevel = 1;
 
-        this.events();
         this.restart();
+        this.events();
     }
     // more methods
     restart(){
@@ -215,6 +216,45 @@ export default class Game {
                     } else {
                         this.pause = true;
                     }
+            }
+        });
+
+        this.buttonInstructions.addEventListener('click', () => {
+            const containerList = document.createElement('div');
+            containerList.setAttribute('id', 'instruction-list');
+            const list = document.createElement('ul');
+
+            const firts = document.createElement('li');
+            firts.textContent = "use the letters 'A' and 'D' to move to the sides";
+            const second = document.createElement('li');
+            second.textContent = "user the 'spacebar' to jump";
+            const third = document.createElement('li');
+            third.textContent = "use the letter 'c' to destroy the red walls";
+            const fourth = document.createElement('li');
+            fourth.textContent = "You can pause the game with the letter 'p'";
+
+            list.append(firts);
+            list.append(second);
+            list.append(third);
+            list.append(fourth);
+            containerList.append(list);
+
+            const divContainerList = document.getElementById('container-instructions');
+            const backButton = document.createElement('button');
+            backButton.textContent = 'close';
+            backButton.setAttribute('id', 'button3')
+            containerList.append(backButton);
+            divContainerList.append(containerList);
+
+            backButton.addEventListener('click', () => {
+                divContainerList.removeChild(containerList);
+                this.pause = false;
+            });
+
+            if(this.pause){
+                this.pause = false;
+            } else {
+                this.pause = true;
             }
         });
     }
