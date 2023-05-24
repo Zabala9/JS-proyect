@@ -3,7 +3,7 @@ import Character2 from "./character2";
 import Level from "./level";
 import Level2 from "./level2";
 import { itemBlocks2 } from "./level2";
-// import { lives } from "./character2";
+import { lives } from "./character2";
 import { itemBlocks } from "./level";
 import { lives1 } from "./character";
 
@@ -155,7 +155,7 @@ export default class Game {
             prg2.setAttribute('id', 'won2');
             prg2.textContent = "If you want to play again press 'restart'"
             const buttonRestart = document.createElement('a');
-            buttonRestart.setAttribute('id', 'button-restart');
+            buttonRestart.setAttribute('id', 'button-restart-game');
             buttonRestart.setAttribute('href', 'https://zabala9.github.io/Mister-Poong/');
             buttonRestart.textContent = 'Restart';
 
@@ -174,7 +174,7 @@ export default class Game {
 
             cancelAnimationFrame(gameRun);
 
-        } else if(lives1 === 0){
+        } else if(lives === 0){
             const divCover = document.createElement('div');
             const footerDelete = document.getElementById('footer');
             footerDelete.remove();

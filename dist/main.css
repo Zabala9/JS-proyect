@@ -226,13 +226,25 @@ li {
   top: 250px;
 }
 
-#button-restart {
+#button-restart-game {
   color: red;
   font-size: 30px;
   background-color: #5b4444;
   position: absolute;
   width: 85px;
   margin-left: calc(50% - 42px);
+  padding: 5px;
+  border-radius: 10px;
+  top: 320px;
+}
+
+#button-restart {
+  color: red;
+  font-size: 30px;
+  background-color: #5b4444;
+  position: absolute;
+  width: 110px;
+  margin-left: calc(50% - 55px);
   padding: 5px;
   border-radius: 10px;
   top: 320px;
