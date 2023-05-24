@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         const second = document.createElement('li');
         second.textContent = "user the 'spacebar' to jump";
         const third = document.createElement('li');
-        third.textContent = "use the letter 'c' to destroy the red walls";
+        third.textContent = "use the letter 'c' + 'd' or 'c' + 'a' to destroy the red walls";
         const fourth = document.createElement('li');
         fourth.textContent = "You can pause the game with the letter 'p'";
 
