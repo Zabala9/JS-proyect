@@ -1,4 +1,5 @@
 import Level2 from "./level2";
+import { lives1 } from "./character";
 import { collisionBlocks2, itemBlocks2, destroyBlocks2 } from "./level2";
 
 const KEYS = {
@@ -13,7 +14,7 @@ const KEYS = {
     }
 }
 
-let lives = 3;
+let lives;
 let currentLevel = 2;
 
 export default class Character2 extends Level2{
@@ -25,6 +26,8 @@ export default class Character2 extends Level2{
             x: 1,
             y: 1
         }
+
+        lives = lives1;
 
         // velocity going down
         this.gravity = 0.5;
