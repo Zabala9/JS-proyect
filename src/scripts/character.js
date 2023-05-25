@@ -1,4 +1,7 @@
 import Level, { collisionBlocks, itemBlocks } from "./level";
+import Item from "./item";
+
+const desappearingItem = './assets/items/desappearing.png';
 
 const KEYS = {
     d: {
@@ -172,9 +175,23 @@ export default class Character extends Level{
                     //deleting item when the collision happens
                     itemBlocks.splice(i, 1);
 
+                    // const pos = itemBlocks.length;
+
+                    // console.log(itemBlocks);
+
+                    // let counter = 1;
+                    // while (counter === 1){
+                    //     itemBlocks.push(new Item({position: {x: item.position.x, y: item.position.y}, imageSource: desappearingItem, subImgs: 5 }));
+                    //     counter += 1;
+                    // }
+
+                    // setTimeout(() => {
+                    //     itemBlocks.splice(pos, 1);
+                    // }, 1000)
+
                     const footerDel = document.getElementById('footer1');
                     footerDel.remove();
-
+    
                     let footer = document.createElement('FOOTER');
                         footer.setAttribute('id', 'footer1');
                         document.body.appendChild(footer);
@@ -197,7 +214,6 @@ export default class Character extends Level{
                         footer.appendChild(p1);
                         footer.appendChild(p2);
                         footer.appendChild(p3);
-
                     break;
             }
         }

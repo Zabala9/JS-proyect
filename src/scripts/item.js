@@ -6,8 +6,8 @@ export default class Item{
         this.image = new Image();
 
         this.image.onload = () => {
-            this.width = this.image.width / subImgs;
-            this.height = this.image.height;
+            this.width = 32;
+            this.height = 32;
         };
         this.image.src = imageSource;
         this.subImgs = subImgs;
