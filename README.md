@@ -20,7 +20,7 @@ You can try it clicking [here!](https://zabala9.github.io/Mister-Poong/)
 - The player can walk, jump and destroy walls.
 - The player is able to pause the game.
 - Advance from one level to the next by collecting all the items.
-- The player starts with 3 lifes and the game will over if lose all lives falling into the gaps.
+- The player starts with 3 lives and the game will over if lose all lives falling into the gaps.
 
 ### In adition this project will include:
 - instructions
