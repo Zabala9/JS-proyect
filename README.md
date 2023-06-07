@@ -45,10 +45,73 @@ You can try it clicking [here!](https://zabala9.github.io/Mister-Poong/)
 
 -------------------------------------------------------------------------------------------------------------------------
 
-## Implementation Timeline
+## Code Snippets
 
-- Friday and Weekend: get a basic framework of the game. Get the character to move around
-- Monday: Introduce the abilities for the character.
-- Tuesday: Include instruction page.
-- Wednesday: Introduce multiple levels.
-- Thursday morning: Refine last details and deploy to Github pages.
+Change character animation depending on the action (run, jump, fall)
+
+```js
+swapAnimation(key){
+    if(this.image === this.animations[key].image || !this.loaded) return
+    
+    this.positionSubImg = 0;
+    this.image = this.animations[key].image;
+    this.subImgs = this.animations[key].subImgs;
+    this.velSubImg = this.animations[key].velSubImg;
+}
+
+if(KEYS.d.typed){
+    /*when I press an expecific key I want to swap the animation */
+    this.swapAnimation('Run');
+    this.velocity.x = 3;
+    this.lastDirection = 'right';
+} else if(KEYS.a.typed){
+    this.swapAnimation('RunLeft');
+    this.velocity.x = -3;
+    this.lastDirection = 'left';
+} else if(this.velocity.y === 0){
+    if(this.lastDirection === 'right'){
+        this.swapAnimation('Idle');
+        if(KEYS.c.typed){
+            this.swapAnimation('WallJump');
+        }
+    } else {
+        this.swapAnimation('IdleLeft');
+        if(KEYS.c.typed){
+            this.swapAnimation('WallJumpLeft');
+        }
+    }
+}
+```
+
+Collision blocks with the item
+
+```js
+checkCollisionItems(){
+    for(let i =0; i < itemBlocks.length; i++){
+        const item = itemBlocks[i];
+
+        if(this.position.y + this.height >= item.position.y &&
+            this.position.y <= item.position.y + this.heightItem &&
+            this.position.x <= item.position.x + this.widthItem &&
+            this.position.x + this.width >= item.position.x){
+                //deleting item when the collision happens
+                itemBlocks.splice(i, 1);
+
+                break;
+        }
+    }
+}
+```
+
+Check when the charater is out of bounds
+
+```js
+checkCharacterOutOfBounds(){
+    if(this.position.y + this.width > this.dimensionsCanvas.height){
+        lives1 = lives1-1;
+
+        this.position.x = 20;
+        this.position.y = 500;
+    }
+}
+```
